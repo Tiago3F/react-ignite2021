@@ -3,12 +3,10 @@ import { Container } from "./styles";
 import incomingImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import totalImg from "../../assets/total.svg";
-
-import React, { useContext } from "react";
-import { TransactionsContext } from "../../TransactionsContext";
+import { useTransactions } from "../../hooks/useTransactions";
 
 export function Summary() {
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactions();
 
   // const totalDeposits = transactions.reduce((acc, transactions) => {
   //   if (transactions.type === "deposit") {
@@ -56,10 +54,13 @@ export function Summary() {
           <p>Saídas</p>
           <img src={outcomeImg} alt="Saídas" />
         </header>
-        <strong>-{new Intl.NumberFormat("pt-BR", {
+        <strong>
+          -
+          {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(summary.witdraw)}</strong>
+          }).format(summary.witdraw)}
+        </strong>
       </div>
 
       <div className="hightlight-background">
@@ -68,7 +69,7 @@ export function Summary() {
           <img src={totalImg} alt="Total" />
         </header>
         <strong>
-        {new Intl.NumberFormat("pt-BR", {
+          {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
           }).format(summary.total)}
